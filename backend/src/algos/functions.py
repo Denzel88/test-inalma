@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 
 def is_palindrome(s: str) -> bool:
     """Devuelve True si s es palíndromo (ignorando espacios y mayúsculas)."""
@@ -72,10 +75,24 @@ def min_path_sum(grid: list[list[int]]) -> int:
 
 
 
-
-
-
-
 def top_k_frequent_words(words: list[str], k: int) -> list[str]:
     """Top k palabras por frecuencia; empate por orden alfabético ascendente."""
-    raise NotImplementedError
+    
+    #COntar la frecuencia de cada palabra
+    count = Counter(words)
+
+    #Obtener una lista de palabras unicas
+    unique_words = list(count.keys())
+
+    #Ordenar la lista
+    #key = lambda W: (-counts[w], w)
+    #lamba W: es una mini-funcion anonima que se ejecuta para cada palabra 'W'
+    #counts[W] obtiene la frecuencia de esa palabra
+    #-counts[W]: la vuelve negativa para poder ordenar de mayor a menor
+    # 'W' es la misma palabra para el desempate alfabetico
+
+    sorted_words = sorted(unique_words, key=lambda W: (-count[W], W))
+
+    #Devolvemos los primeros 'k' elementos de la lista ordenada
+    return sorted_words[:k]
+
