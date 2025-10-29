@@ -1,7 +1,13 @@
 
 def is_palindrome(s: str) -> bool:
     """Devuelve True si s es palíndromo (ignorando espacios y mayúsculas)."""
-    raise NotImplementedError
+
+    #Limpiar la cadena 
+    clean_string = s.replace(" ", "").lower()
+    
+    #Esta seccion compararemos el reverso de la cadena
+    return clean_string  == clean_string [::-1]
+
 
 def compress_ranges(nums: list[int]) -> list[str]:
     """Comprime secuencias consecutivas:
