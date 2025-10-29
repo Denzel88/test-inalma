@@ -48,7 +48,33 @@ def compress_ranges(nums: list[int]) -> list[str]:
 
 def min_path_sum(grid: list[list[int]]) -> int:
     """Suma mínima de camino desde (0,0) a (n-1,m-1) moviéndose solo derecha/abajo."""
-    raise NotImplementedError
+
+    #Obtener dimensiones
+    if not grid or not grid[0]:
+        return 0
+    filas = len(grid)
+    columnas = len(grid[0])
+
+    #Inicializar primera fina (Suma hacia la derecha)
+    #Iterar desde la segunda columna indice 1 hasta el final
+    for j in range(1, columnas):
+        grid[0][j] += grid[0][j] + grid[0][j-1]
+
+    #Inicializar primera columna (Suma hacia abajo)
+    #Iterar desde la segunda fila
+    for i in range(1, filas):
+        for j in range(1, columnas):
+            #Nuevo valor sera : el valor original + el minimo entre la celda de arriba
+            #y de la izquierda
+            grid[i][j] = grid[i][j] + min(grid[i-1][j], grid[i][j-1])
+
+    return grid[filas-1][columnas-1]
+
+
+
+
+
+
 
 def top_k_frequent_words(words: list[str], k: int) -> list[str]:
     """Top k palabras por frecuencia; empate por orden alfabético ascendente."""
